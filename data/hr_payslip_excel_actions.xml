@@ -1,0 +1,24 @@
+<?xml version="1.0" encoding="utf-8"?>
+<odoo>
+    <record id="action_export_excel_from_payslip_batch" model="ir.actions.server">
+        <field name="name">Export Payslip Excel</field>
+        <!-- Ensure that the reference to the model is correct -->
+        <field name="model_id" ref="om_hr_payroll.model_hr_payslip_run"/>
+        <field name="state">code</field>
+        <field name="binding_model_id" ref="om_hr_payroll.model_hr_payslip_run"/>
+        <field name="binding_type">action</field>
+        <field name="code">
+            action = {
+            'type': 'ir.actions.act_window',
+            'res_model': 'payslip.excel.wizard',
+            'view_mode': 'form',
+            'target': 'new',
+            'context': {
+            'default_date_start': record.date_start,
+            'default_date_end': record.date_end,
+            'default_payslip_ids': [slip.id for slip in record.slip_ids],
+            }
+            }
+        </field>
+    </record>
+</odoo>

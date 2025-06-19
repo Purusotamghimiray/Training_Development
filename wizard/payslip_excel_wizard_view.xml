@@ -1,0 +1,31 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<odoo>
+    <record id="view_payslip_excel_wizard" model="ir.ui.view">
+        <field name="name">payslip.excel.wizard.form</field>
+        <field name="model">payslip.excel.wizard</field>
+        <field name="arch" type="xml">
+            <form string="Payslip Excel Export">
+                <group>
+                    <field name="date_start"/>
+                    <field name="date_end"/>
+                    <!--                    <field name="payslip_ids" widget="many2many_tags" options="{'no_create': True}" invisible="1"/>-->
+                    <field name="payslip_ids" widget="many2many_tags" readonly="1" invisible="1"/>
+
+                </group>
+                <footer>
+                    <button string="Export Excel" type="object" name="action_export_excel" class="btn-primary"/>
+                    <button string="Cancel" class="btn-secondary" special="cancel"/>
+                </footer>
+                <!--                <group attrs="{'invisible': [('excel_file', '=', False)]}">-->
+                <!--                    <field name="excel_file" filename="filename"/>-->
+                <!--                    <field name="filename" invisible="1"/>-->
+                <!--                </group>-->
+                <group invisible="not excel_file">
+                    <field name="excel_file" filename="filename"/>
+                    <field name="filename" invisible="1"/>
+                </group>
+
+            </form>
+        </field>
+    </record>
+</odoo>
