@@ -1,0 +1,48 @@
+<?xml version="1.0" encoding="utf-8"?>
+<odoo>
+    <record id="view_leave_report_wizard_form" model="ir.ui.view">
+        <field name="name">leave.report.wizard.form</field>
+        <field name="model">leave.report.wizard</field>
+        <field name="arch" type="xml">
+            <form string="Generate Leave Report">
+                <sheet>
+                    <group>
+                        <group>
+                            <field name="date_from"/>
+                            <field name="date_to"/>
+                        </group>
+                    </group>
+                    <group attrs="{'invisible': [('excel_file', '=', False)]}">
+                        <field name="excel_file" filename="file_name" readonly="1"/>
+                        <field name="file_name" invisible="1"/>
+                    </group>
+                    <footer>
+                        <button name="generate_excel_report" 
+                                string="Generate Report" 
+                                type="object" 
+                                class="btn-primary"
+                                data-hotkey="q"/>
+                        <button string="Cancel" 
+                                class="btn-secondary" 
+                                special="cancel"
+                                data-hotkey="z"/>
+                    </footer>
+                </sheet>
+            </form>
+        </field>
+    </record>
+
+    <record id="action_leave_report_wizard" model="ir.actions.act_window">
+        <field name="name">Generate Leave Report</field>
+        <field name="type">ir.actions.act_window</field>
+        <field name="res_model">leave.report.wizard</field>
+        <field name="view_mode">form</field>
+        <field name="target">new</field>
+    </record>
+
+    <menuitem id="menu_leave_report_wizard"
+              name="Leave Excel Report"
+              parent="hr_holidays.menu_hr_holidays_report"
+              action="action_leave_report_wizard"
+              sequence="100"/>
+</odoo>
